@@ -1,1 +1,24 @@
+name: Python Matrix Strategy Workflow
+
+on: push
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}  # Use matrix to define OS
+    strategy:
+      matrix:
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]  # Define OS variations
+        python-version: ["3.9", "3.10", "3.11", "3.12"]  # Define Python versions
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}  # Install matrix-defined Python versions
+
+      - name: Verify Python Installation
+        run: python --version  # Print the installed Python version
 
